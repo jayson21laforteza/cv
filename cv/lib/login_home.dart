@@ -1,111 +1,130 @@
 import 'package:cv/info.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(LoginApp());
-
-class LoginApp extends StatelessWidget {
+class Login extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(),
-    );
-  }
+  _LoginState createState() => _LoginState();
 }
 
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  String _email = "lafortezajayson0@email.com";
-  String _password = "Laforteza@123";
+class _LoginState extends State<Login> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 123, 64, 231),
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: Text('Login'),
+        backgroundColor: Color.fromARGB(141, 71, 244, 3),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
-            children: <Widget>[
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Center(
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('images/icon.jpg'),
+                ),
+              ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Email'),
+                style: TextStyle(
+                  color: Color.fromARGB(255, 245, 238, 238),
+                ),
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                  labelStyle: TextStyle(
+                    color: Color.fromARGB(255, 244, 237, 237),
+                  ),
+                ),
                 validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Email is required';
-                  } else if (!isValidEmail(value!)) {
-                    return 'Please enter a valid email address';
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your username';
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  _email = value!;
-                },
               ),
+              SizedBox(height: 20),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Password'),
-                obscureText: true,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 245, 241, 241),
+                ),
+                controller: _passwordController,
+                obscureText: !_passwordVisible,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: TextStyle(
+                    color: Color.fromARGB(255, 249, 240, 240),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisible = !_passwordVisible;
+                      });
+                    },
+                  ),
+                ),
                 validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Password is required';
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  _password = value!;
-                },
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 217, 0, 255)),
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    // Perform login logic here, e.g., validate credentials.
-                    // Replace with your authentication logic.
-                    if (_email == 'lafortezajayson0@email.com' && _password == 'Laforteza@123') {
-                      // Successful login, navigate to another screen.
+                  if (_formKey.currentState?.validate() == true) {
+                    // Check for specific username and password
+                    if (_usernameController.text == "lafortezajayson0@email.com" &&
+                        _passwordController.text == "Laforteza@123") {
+                      // Successful login
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyApp()),
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
                     } else {
+                      // Incorrect username or password
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Invalid email or password')),
+                        SnackBar(
+                          content: Text('Incorrect username or password'),
+                        ),
                       );
                     }
                   }
                 },
-                child: Text('Login'),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 5, 5, 5),
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>HomeScreen()),
+                  );
+                },
+                child: Text('Sign Up'),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  bool isValidEmail(String email) {
-    // A simple email validation check.
-    final emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
-    return emailRegExp.hasMatch(email);
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Welcome'),
-      ),
-      body: Center(
-        child: Text('Welcome to the Home Screen!'),
       ),
     );
   }

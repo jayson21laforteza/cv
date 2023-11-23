@@ -48,7 +48,7 @@ class skill extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      "Jasyon Laforteza",
+                      "Jayson Laforteza",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 18,
@@ -275,7 +275,7 @@ class skill extends StatelessWidget {
                         onPressed: () => {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => MyApp(),
+                              builder: (context) => HomeScreen(),
                             ),
                           )
                         },

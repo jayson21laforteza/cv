@@ -49,7 +49,7 @@ class education extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      "Jasyon Laforteza",
+                      "Jayson Laforteza",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 18,
@@ -276,7 +276,7 @@ class education extends StatelessWidget {
                         onPressed: () => {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => MyApp(),
+                              builder: (context) => HomeScreen(),
                             ),
                           )
                         },

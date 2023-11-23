@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'info.dart';
+import 'login_home.dart'; // import the LoginPage class
 
 void main() {
-  runApp(
-    const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyApp(),
-    ),
-  );
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Login(),
+    );
+  }
 }

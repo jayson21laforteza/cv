@@ -1,11 +1,11 @@
+import 'package:cv/login_home.dart';
 import 'package:cv/skill.dart';
 import 'package:flutter/material.dart';
 import 'PersonalInfo.dart';
 import 'education.dart';
-import 'login_home.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -154,15 +154,12 @@ class MyApp extends StatelessWidget {
                         )
                       },
                       icon: Icon(
-                        Icons.person_outlined,
+                        Icons.person_outline,
                         color: Colors.blueAccent,
                       ),
                     ),
                     SizedBox(width: 15),
-
-                  ],
-                ),
-                 IconButton(
+                    IconButton(
                       onPressed: () => {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -175,7 +172,12 @@ class MyApp extends StatelessWidget {
                         color: Colors.blueAccent,
                       ),
                     ),
-                    SizedBox(width: 15,),
+                  ],
+                ),
+                 
+                     //CenteredIconButton(width: 15,),
+                   //SizedBox_CenteredIconButton(width: 15,),
+                    
               ],
             ),
           ),
